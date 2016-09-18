@@ -1,0 +1,17 @@
+*.pyc
+*#*
+*.DS_STORE
+*.log
+*Data.fs*
+*flymake*
+dist/*
+*egg*
+urllist*
+build/
+__pycache__/
+/.Python
+/bin/
+/include/
+/lib/
+/pip-selfcheck.json
+.tox/
