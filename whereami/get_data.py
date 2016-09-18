@@ -30,7 +30,9 @@ def sample():
     return dc
 
 
-def get_train_data(folder=os.path.expanduser("~/.whereami")):
+def get_train_data(folder=None):
+    if folder is None:
+        folder = os.path.expanduser("~/.whereami")
     parser = None
     X = []
     y = []
