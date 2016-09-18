@@ -6,7 +6,7 @@ Uses WiFi signals to predict where you are. Even works for small distances like 
 
 ### Installation
 
-pip install whereami
+    pip install whereami
 
 ### Usage
 
