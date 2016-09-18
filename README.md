@@ -4,6 +4,12 @@ Uses WiFi signals to predict where you are. Even works for small distances like 
 
 **OSX Only**
 
+### Installation
+
+pip install whereami
+
+### Usage
+
 ```bash
 # in your bedroom, takes 100 samples
 whereami learn bedroom 100
