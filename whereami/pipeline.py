@@ -5,7 +5,7 @@ from sklearn.cross_validation import train_test_split
 
 class LocationPipeline():
 
-    def __init__(self, clf=RandomForestClassifier()):
+    def __init__(self, clf=RandomForestClassifier(n_estimators=100)):
         self.clf = clf
         self.dv = DictVectorizer(sparse=False)
 
