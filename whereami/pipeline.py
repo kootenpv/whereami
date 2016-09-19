@@ -1,3 +1,4 @@
+import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.cross_validation import train_test_split
