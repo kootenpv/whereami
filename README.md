@@ -4,7 +4,7 @@ Uses WiFi signals (and sklearn RandomForest) to predict where you are. Even work
 
 Your computer will known whether you are on Couch #1 or Couch #2.
 
-**OSX Only**
+**OSX Only (for now)**
 
 ### Installation
 
