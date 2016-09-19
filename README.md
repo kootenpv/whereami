@@ -19,6 +19,10 @@ Your computer will known whether you are on Couch #1 or Couch #2.
     # in your kitchen, takes 100 samples
     whereami learn kitchen 100
 
+    # cross-validated accuracy on historic data
+    whereami crossval
+    # 0.99319
+
     # use in other applications, e.g. by piping the most likely answer:
     whereami predict | say
     # Computer Voice says: "bedroom"
