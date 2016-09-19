@@ -19,11 +19,12 @@ Your computer will known whether you are on Couch #1 or Couch #2.
     # in your kitchen, takes 100 samples
     whereami learn kitchen 100
 
-    # text-to-speech where you are
-    whereami predict -tts
+    # use in other applications, e.g. by piping the most likely answer:
+    whereami predict | say
+    # Computer Voice says: "bedroom"
 
-    # numeric
-    whereami predict
+    # probabilities per class
+    whereami predict_proba
     # {"bedroom": 0.99, "kitchen": 0.01}
 ```
 
