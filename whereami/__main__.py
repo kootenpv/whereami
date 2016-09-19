@@ -1,5 +1,6 @@
 import sys
 from whereami.predict import predict
+from whereami.predict import predict_proba
 from whereami.learn import learn
 
 
