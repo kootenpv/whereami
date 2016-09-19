@@ -18,4 +18,5 @@ def predict_proba():
 
 
 def predict(tts=False):
+    lp = get_model()
     print(lp.predict(sample())[0])
