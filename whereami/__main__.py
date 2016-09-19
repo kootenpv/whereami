@@ -1,6 +1,7 @@
 import sys
 from whereami.predict import predict
 from whereami.predict import predict_proba
+from whereami.predict import crossval
 from whereami.learn import learn
 
 
@@ -13,3 +14,5 @@ def main():
         category = sys.argv[2]
         n = int(sys.argv[3])
         learn(category, n)
+    elif "crossval" in sys.argv[1]:
+        crossval()

@@ -20,3 +20,9 @@ def predict_proba():
 def predict(tts=False):
     lp = get_model()
     print(lp.predict(sample())[0])
+
+
+def crossval():
+    X, y = get_train_data()
+    lp = get_model()
+    print(lp.crossval(X, y))
