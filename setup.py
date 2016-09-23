@@ -2,7 +2,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 MAJOR_VERSION = '0'
-MINOR_VERSION = '0'
+MINOR_VERSION = '1'
 MICRO_VERSION = '14'
 VERSION = "{}.{}.{}".format(MAJOR_VERSION, MINOR_VERSION, MICRO_VERSION)
 
@@ -13,7 +13,7 @@ setup(name='whereami',
       url='https://github.com/kootenpv/whereami',
       author_email='kootenpv@gmail.com',
       install_requires=[
-          'scikit-learn', 'tqdm'
+          'scikit-learn', 'tqdm', 'access_points'
       ],
       entry_points={
           'console_scripts': ['whereami = whereami.__main__:main']

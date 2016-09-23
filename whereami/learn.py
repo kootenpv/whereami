@@ -1,17 +1,29 @@
 import subprocess
-from tqdm import tqdm
 import os
+import json
+from tqdm import tqdm
+from whereami.get_data import sample
 
-path = os.path.expanduser("~/.whereami")
-if not os.path.exists(path):
-    os.makedirs(path)
+
+def ensure_whereami_path():
+    path = os.path.expanduser("~/.whereami")
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path
 
 
-CMD = "/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -s >> {}.txt"
+def write_data(label_path, data, file_exists):
+    with open(label_path, "a") as f:
+        if file_exists:
+            f.write("\n")
+        f.write(json.dumps(data))
 
 
 def learn(label, n=100):
-    cmd = CMD.format(os.path.join(path, label))
+    path = ensure_whereami_path()
+    label_path = os.path.join(path, label + ".txt")
+    file_exists = os.path.isfile(label_path)
     for _ in tqdm(range(n)):
-        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-        (out, _) = proc.communicate()
+        data = sample()
+        write_data(label_path, data, file_exists)
+        file_exists = True
