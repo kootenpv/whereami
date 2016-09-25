@@ -1,15 +1,7 @@
-from whereami.pipeline import LocationPipeline
 from whereami.get_data import get_train_data
 from whereami.get_data import sample
-
-
-def get_model():
-    # should really not have to train every time :-)
-    # TODO: implement caching of model, retrain model after more learning
-    X, y = get_train_data()
-    lp = LocationPipeline()
-    lp.fit(X, y)
-    return lp
+from whereami.pipeline import get_model
+from whereami.pipeline import cross_validate_model
 
 
 def predict_proba():
@@ -17,7 +9,7 @@ def predict_proba():
     print({x: y for x, y in zip(lp.clf.classes_, lp.predict_proba(sample())[0])})
 
 
-def predict(tts=False):
+def predict():
     lp = get_model()
     print(lp.predict(sample())[0])
 
@@ -25,4 +17,4 @@ def predict(tts=False):
 def crossval():
     X, y = get_train_data()
     lp = get_model()
-    print(lp.crossval(X, y))
+    print(cross_validate_model(lp, X, y))

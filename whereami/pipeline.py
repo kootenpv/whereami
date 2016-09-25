@@ -1,35 +1,43 @@
+import pickle
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction import DictVectorizer
+from sklearn.pipeline import make_pipeline
 from sklearn.cross_validation import train_test_split
+from whereami.get_data import get_train_data
+from whereami.utils import get_model_file
 
 
-class LocationPipeline():
+def cross_validate_model(clf, X, y, n=100):
+    means = []
+    for _ in range(n):
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+        clf.fit(X_train, y_train)
+        means.append(np.mean(clf.predict(X_test) == y_test))
+    return np.mean(means)
 
-    def __init__(self, clf=RandomForestClassifier(n_estimators=100)):
-        self.clf = clf
-        self.dv = DictVectorizer(sparse=False)
 
-    def fit(self, X, y):
-        tX = self.dv.fit_transform(X)
-        tX[tX == 0] = -100
-        self.clf.fit(tX, y)
-        return self
+def train_model():
+    model_file = get_model_file()
+    X, y = get_train_data()
+    # fantastic: because using "quality" rather than "rssi", we expect values 0-150
+    # 0 essentially indicates no connection
+    # 150 is something like best possible connection
+    # Not observing a wifi will mean a value of 0, which is the perfect default.
+    lp = make_pipeline(DictVectorizer(sparse=False),
+                       RandomForestClassifier(n_estimators=100))
+    lp.fit(X, y)
+    with open(model_file, "wb") as f:
+        pickle.dump(lp, f)
+    return lp
 
-    def predict(self, X):
-        tX = self.dv.transform(X)
-        tX[tX == 0] = -100
-        return self.clf.predict(tX)
 
-    def predict_proba(self, X):
-        tX = self.dv.transform(X)
-        tX[tX == 0] = -100
-        return self.clf.predict_proba(tX)
-
-    def crossval(self, X, y, n=100):
-        means = []
-        for _ in range(n):
-            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-            self.fit(X_train, y_train)
-            means.append(np.mean(self.predict(X_test) == y_test))
-        return np.mean(means)
+def get_model():
+    model_file = get_model_file()
+    try:
+        with open(model_file, "rb") as f:
+            lp = pickle.load(f)
+    except FileNotFoundError:
+        msg = "First learn a location, e.g. with `metadate learn home 10`."
+        raise FileNotFoundError(msg)
+    return lp

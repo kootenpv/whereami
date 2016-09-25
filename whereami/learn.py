@@ -1,15 +1,11 @@
-import subprocess
 import os
+
 import json
 from tqdm import tqdm
 from whereami.get_data import sample
-
-
-def ensure_whereami_path():
-    path = os.path.expanduser("~/.whereami")
-    if not os.path.exists(path):
-        os.makedirs(path)
-    return path
+from whereami.pipeline import train_model
+from whereami.utils import ensure_whereami_path
+from whereami.utils import get_label_file
 
 
 def write_data(label_path, data, file_exists):
@@ -21,9 +17,13 @@ def write_data(label_path, data, file_exists):
 
 def learn(label, n=100):
     path = ensure_whereami_path()
-    label_path = os.path.join(path, label + ".txt")
+    label_path = get_label_file(path, label + ".txt")
     file_exists = os.path.isfile(label_path)
     for _ in tqdm(range(n)):
-        data = sample()
-        write_data(label_path, data, file_exists)
-        file_exists = True
+        try:
+            data = sample()
+            write_data(label_path, data, file_exists)
+            file_exists = True
+        except KeyboardInterrupt:
+            break
+    train_model()
