@@ -8,6 +8,11 @@ from whereami.get_data import get_train_data
 from whereami.utils import get_model_file
 
 
+def get_pipeline():
+    return make_pipeline(DictVectorizer(sparse=False),
+                         RandomForestClassifier(n_estimators=100))
+
+
 def cross_validate_model(pipeline, X, y, n=100):
     means = []
     for _ in range(n):
@@ -24,8 +29,7 @@ def train_model():
     # 0 essentially indicates no connection
     # 150 is something like best possible connection
     # Not observing a wifi will mean a value of 0, which is the perfect default.
-    lp = make_pipeline(DictVectorizer(sparse=False),
-                       RandomForestClassifier(n_estimators=100))
+    lp = get_pipeline()
     lp.fit(X, y)
     with open(model_file, "wb") as f:
         pickle.dump(lp, f)

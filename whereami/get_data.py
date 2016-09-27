@@ -4,14 +4,19 @@ import os
 from access_points import get_scanner
 
 
-def sample():
-    wifi_scanner = get_scanner()
-    aps = wifi_scanner.get_access_points()
+def aps_to_dict(aps):
     dc = {}
     for ap in aps:
         key = ap['ssid'] + " " + ap['bssid']
         value = ap['quality']
         dc[key] = value
+    return dc
+
+
+def sample():
+    wifi_scanner = get_scanner()
+    aps = wifi_scanner.get_access_points()
+    dc = aps_to_dict(aps)
     return dc
 
 
