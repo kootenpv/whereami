@@ -13,7 +13,7 @@ setup(name='whereami',
       url='https://github.com/kootenpv/whereami',
       author_email='kootenpv@gmail.com',
       install_requires=[
-          'scikit-learn', 'tqdm', 'access_points'
+          'scipy', 'numpy', 'scikit-learn', 'tqdm', 'access_points'
       ],
       entry_points={
           'console_scripts': ['whereami = whereami.__main__:main']
