@@ -21,7 +21,8 @@ def get_args_parser():
 
 
 def main():
-    args = get_args_parser().parse_args()
+    parser = get_args_parser()
+    args = parser.parse_args()
     if args.command == "predict_proba":
         predict_proba()
     elif args.command == "predict":
@@ -30,3 +31,6 @@ def main():
         learn(args.location, args.num_samples)
     elif args.command == "crossval":
         crossval()
+    else:
+        parser.print_help()
+        parser.exit(1)
