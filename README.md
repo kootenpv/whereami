@@ -19,10 +19,10 @@ The package [access_points](https://github.com/kootenpv/accces_points) was creat
 
 ```bash
 # in your bedroom, takes 100 samples
-whereami learn bedroom 100
+whereami learn -l bedroom -n 100
 
 # in your kitchen, takes 100 samples
-whereami learn kitchen 100
+whereami learn -l kitchen -n 100
 
 # cross-validated accuracy on historic data
 whereami crossval
