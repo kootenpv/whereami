@@ -8,22 +8,18 @@ from whereami.utils import ensure_whereami_path
 from whereami.utils import get_label_file
 
 
-def write_data(label_path, data, file_exists):
+def write_data(label_path, data):
     with open(label_path, "a") as f:
-        if file_exists:
-            f.write("\n")
         f.write(json.dumps(data))
+        f.write("\n")
 
 
 def learn(label, n=100):
     path = ensure_whereami_path()
     label_path = get_label_file(path, label + ".txt")
-    file_exists = os.path.isfile(label_path)
     for _ in tqdm(range(n)):
         try:
-            data = sample()
-            write_data(label_path, data, file_exists)
-            file_exists = True
+            write_data(label_path, sample())
         except KeyboardInterrupt:
             break
     train_model()
