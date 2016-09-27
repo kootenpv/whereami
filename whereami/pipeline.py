@@ -8,12 +8,12 @@ from whereami.get_data import get_train_data
 from whereami.utils import get_model_file
 
 
-def cross_validate_model(clf, X, y, n=100):
+def cross_validate_model(pipeline, X, y, n=100):
     means = []
     for _ in range(n):
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-        clf.fit(X_train, y_train)
-        means.append(np.mean(clf.predict(X_test) == y_test))
+        pipeline.fit(X_train, y_train)
+        means.append(np.mean(pipeline.predict(X_test) == y_test))
     return np.mean(means)
 
 

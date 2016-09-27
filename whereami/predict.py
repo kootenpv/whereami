@@ -6,7 +6,7 @@ from whereami.pipeline import cross_validate_model
 
 def predict_proba():
     lp = get_model()
-    print({x: y for x, y in zip(lp.clf.classes_, lp.predict_proba(sample())[0])})
+    print({x: y for x, y in zip(lp.classes_, lp.predict_proba(sample())[0])})
 
 
 def predict():
