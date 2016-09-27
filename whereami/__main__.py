@@ -6,8 +6,11 @@ from whereami.learn import learn
 
 def get_args_parser():
     import argparse
+    from argparse import RawTextHelpFormatter
     desc = 'Uses WiFi signals and machine learning to predict where you are.'
-    p = argparse.ArgumentParser(description=desc)
+    desc += '\nFeel free to try out commands, if anything is missing it will print help.'
+    desc += '\n\nYou will want to start with `whereami learn`'
+    p = argparse.ArgumentParser(description=desc, formatter_class=RawTextHelpFormatter)
     subparsers = p.add_subparsers(dest="command")
     subparsers.add_parser('predict')
     subparsers.add_parser('predict_proba')
