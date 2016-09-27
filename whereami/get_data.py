@@ -17,13 +17,15 @@ def sample():
 
 def get_train_data(folder=None):
     if folder is None:
-        folder = ensure_whereami_path()
+        folder = os.path.expanduser("~/.whereami")
     X = []
     y = []
     for fname in os.listdir(folder):
         if fname.endswith(".txt"):
+            data = []
             with open(os.path.join(folder, fname)) as f:
-                data = map(json.loads, f)
+                for line in f:
+                    data.append(json.loads(line))
             X.extend(data)
-            y.extend(fname.rstrip(".txt") for _ in data)
+            y.extend([fname.rstrip(".txt")] * len(data))
     return X, y
