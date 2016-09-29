@@ -1,25 +1,14 @@
 import pickle
-import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.pipeline import make_pipeline
-from sklearn.cross_validation import train_test_split
 from whereami.get_data import get_train_data
 from whereami.utils import get_model_file
 
 
-def get_pipeline():
+def get_pipeline(clf=RandomForestClassifier(n_estimators=500, class_weight="balanced")):
     return make_pipeline(DictVectorizer(sparse=False),
-                         RandomForestClassifier(n_estimators=100))
-
-
-def cross_validate_model(pipeline, X, y, n=100):
-    means = []
-    for _ in range(n):
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
-        pipeline.fit(X_train, y_train)
-        means.append(np.mean(pipeline.predict(X_test) == y_test))
-    return np.mean(means)
+                         clf)
 
 
 def train_model():

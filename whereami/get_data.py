@@ -17,7 +17,7 @@ def sample():
 
 def get_train_data(folder=None):
     if folder is None:
-        folder = os.path.expanduser("~/.whereami")
+        folder = ensure_whereami_path()
     X = []
     y = []
     for fname in os.listdir(folder):

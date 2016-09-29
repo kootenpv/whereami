@@ -1,8 +1,8 @@
-import os
-
 import json
 from tqdm import tqdm
+
 from whereami.get_data import sample
+
 from whereami.pipeline import train_model
 from whereami.utils import ensure_whereami_path
 from whereami.utils import get_label_file
