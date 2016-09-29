@@ -5,6 +5,11 @@ from sklearn.pipeline import make_pipeline
 from whereami.get_data import get_train_data
 from whereami.utils import get_model_file
 
+try:
+    FileNotFoundError
+except NameError:
+    FileNotFoundError = IOError
+
 
 def get_pipeline(clf=RandomForestClassifier(n_estimators=500, class_weight="balanced")):
     return make_pipeline(DictVectorizer(sparse=False),
@@ -31,6 +36,6 @@ def get_model():
         with open(model_file, "rb") as f:
             lp = pickle.load(f)
     except FileNotFoundError:
-        msg = "First learn a location, e.g. with `metadate learn home 10`."
+        msg = "First learn a location, e.g. with `metadate learn -l kitchen`."
         raise FileNotFoundError(msg)
     return lp
