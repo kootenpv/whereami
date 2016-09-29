@@ -25,4 +25,5 @@ def crossval(clf=None, X=None, y=None, folds=10, n=5):
         tot += res
         print("{}/{}: {}".format(i + 1, n, res))
     print("-------- total --------")
+    print(tot / n)
     return tot / n
