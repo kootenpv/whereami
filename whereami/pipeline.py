@@ -36,6 +36,6 @@ def get_model():
         with open(model_file, "rb") as f:
             lp = pickle.load(f)
     except FileNotFoundError:
-        msg = "First learn a location, e.g. with `metadate learn -l kitchen`."
+        msg = "First learn a location, e.g. with `whereami learn -l kitchen`."
         raise FileNotFoundError(msg)
     return lp
