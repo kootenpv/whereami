@@ -19,7 +19,9 @@ def learn(label, n=100):
     label_path = get_label_file(path, label + ".txt")
     for _ in tqdm(range(n)):
         try:
-            write_data(label_path, sample())
+            new_sample = sample()
+            if new_sample:
+                write_data(label_path, new_sample)
         except KeyboardInterrupt:
             break
     train_model()
