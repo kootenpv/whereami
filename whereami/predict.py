@@ -1,7 +1,7 @@
 from whereami.get_data import get_train_data
 from whereami.get_data import sample
 from whereami.pipeline import get_model
-from sklearn.model_selection import cross_val_score
+from whereami.compat import cross_val_score
 
 
 def predict_proba():

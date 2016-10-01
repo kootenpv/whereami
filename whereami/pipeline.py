@@ -4,11 +4,7 @@ from sklearn.feature_extraction import DictVectorizer
 from sklearn.pipeline import make_pipeline
 from whereami.get_data import get_train_data
 from whereami.utils import get_model_file
-
-try:
-    FileNotFoundError
-except NameError:
-    FileNotFoundError = IOError
+from whereami.compat import FileNotFoundError
 
 
 def get_pipeline(clf=RandomForestClassifier(n_estimators=500, class_weight="balanced")):
