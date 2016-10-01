@@ -1,5 +1,9 @@
 ## whereami
 
+[![Build Status](https://travis-ci.org/kootenpv/whereami.svg?branch=master)](https://travis-ci.org/kootenpv/whereami)
+[![PyPI](https://img.shields.io/pypi/v/whereami.svg?style=flat-square)](https://pypi.python.org/pypi/whereami/)
+[![PyPI](https://img.shields.io/pypi/pyversions/whereami.svg?style=flat-square)](https://pypi.python.org/pypi/whereami/)
+
 Uses WiFi signals and machine learning (sklearn's RandomForest) to predict where you are. Even works for small distances like 2-10 meters.
 
 Your computer will known whether you are on Couch #1 or Couch #2.

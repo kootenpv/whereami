@@ -2,7 +2,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 MAJOR_VERSION = '0'
-MINOR_VERSION = '2'
+MINOR_VERSION = '3'
 MICRO_VERSION = '33'
 VERSION = "{}.{}.{}".format(MAJOR_VERSION, MINOR_VERSION, MICRO_VERSION)
 
