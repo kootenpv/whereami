@@ -8,7 +8,7 @@ Your computer will known whether you are on Couch #1 or Couch #2.
 
 Works on OSX, Windows, Linux (tested on Ubuntu/Arch Linux).
 
-The package [access_points](https://github.com/kootenpv/accces_points) was created in the process to allow scanning wifi in a cross platform manner. Using `access_points` at command-line will allow you to scan wifi yourself and get JSON output.
+The package [access_points](https://github.com/kootenpv/access_points) was created in the process to allow scanning wifi in a cross platform manner. Using `access_points` at command-line will allow you to scan wifi yourself and get JSON output.
 `whereami` builds on top of it.
 
 ### Installation
