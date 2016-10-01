@@ -59,3 +59,11 @@ Height: Surprisingly, vertical difference in location is typically even more dis
 https://github.com/schollz/find
 
 That project used to be in Python, but is now written in Go. `whereami` is in Python with lessons learned implemented.
+
+### Tests
+
+It's possible to locally run tests for python 2.7, 3.4 and 3.5 using tox.
+
+    git clone https://github.com/kootenpv/whereami
+    cd whereami
+    tox
