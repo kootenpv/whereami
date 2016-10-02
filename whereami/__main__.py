@@ -3,6 +3,8 @@ from whereami.predict import predict_proba
 from whereami.predict import crossval
 from whereami.learn import learn
 
+from whereami import print_version
+
 
 def get_args_parser():
     import argparse
@@ -11,6 +13,7 @@ def get_args_parser():
     desc += '\nFeel free to try out commands, if anything is missing it will print help.'
     desc += '\n\nYou will want to start with `whereami learn`'
     p = argparse.ArgumentParser(description=desc, formatter_class=RawTextHelpFormatter)
+    p.add_argument('--version', '-v', action='version', version=print_version())
     subparsers = p.add_subparsers(dest="command")
     subparsers.add_parser('predict')
     subparsers.add_parser('predict_proba')
