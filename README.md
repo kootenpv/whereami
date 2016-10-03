@@ -66,4 +66,5 @@ It's possible to locally run tests for python 2.7, 3.4 and 3.5 using tox.
 
     git clone https://github.com/kootenpv/whereami
     cd whereami
+    python setup.py install
     tox
