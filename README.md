@@ -54,6 +54,9 @@ Doing this in 100 in spot A, then 100 in spot B and then immediately using "pred
 
 Height: Surprisingly, vertical difference in location is typically even more distinct than horizontal differences.
 
+### Related Projects
+- The [wherearehue](https://github.com/DeastinY/wherearehue) project can be used to toggle Hue light bulbs based on the learned locations.
+
 ### Common Issues
 
 If the program fails with the error `nmcli-CRITICAL **: Error: Could not create NMClient object:` it is probably due to issues with the underlying [access_points](https://github.com/kootenpv/access_points) package. Check back there for further guidance before creating an issue here.
