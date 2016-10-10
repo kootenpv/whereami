@@ -28,6 +28,9 @@ whereami learn -l bedroom -n 100
 # in your kitchen, takes 100 samples
 whereami learn -l kitchen -n 100
 
+# get a list of already learned locations
+whereami locations
+
 # cross-validated accuracy on historic data
 whereami crossval
 # 0.99319
