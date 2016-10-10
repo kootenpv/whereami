@@ -1,6 +1,7 @@
 from whereami.predict import predict
 from whereami.predict import predict_proba
 from whereami.predict import crossval
+from whereami.predict import locations
 from whereami.learn import learn
 
 from whereami import print_version
@@ -18,6 +19,7 @@ def get_args_parser():
     subparsers.add_parser('predict')
     subparsers.add_parser('predict_proba')
     subparsers.add_parser('crossval')
+    subparsers.add_parser('locations')
     learn_parser = subparsers.add_parser('learn')
     learn_parser.add_argument('--location', '-l', required=True,
                               help='A name-tag for location to learn.')
@@ -37,6 +39,8 @@ def main():
         learn(args.location, args.num_samples)
     elif args.command == "crossval":
         crossval()
+    elif args.command == "locations":
+        locations()
     else:
         parser.print_help()
         parser.exit(1)

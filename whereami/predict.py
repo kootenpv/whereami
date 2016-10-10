@@ -1,3 +1,5 @@
+from collections import Counter
+
 from whereami.get_data import get_train_data
 from whereami.get_data import sample
 from whereami.pipeline import get_model
@@ -27,3 +29,13 @@ def crossval(clf=None, X=None, y=None, folds=10, n=5):
     print("-------- total --------")
     print(tot / n)
     return tot / n
+
+def locations():
+    X, y = get_train_data()
+    if len(y) == 0:
+        msg = "No location samples available. First learn a location, e.g. with `whereami learn -l kitchen`."
+        print(msg)
+    else:
+        occurrences = Counter(y)
+        for key,value in occurrences.items():
+            print("{}: {}".format(key,value))
