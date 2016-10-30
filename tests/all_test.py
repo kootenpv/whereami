@@ -32,7 +32,6 @@ def test_crossval():
     X, y = mock_get_train_data()
     pipeline = mock_get_model()
     assert crossval(pipeline, X, y, folds=2, n=1)
-    assert crossval(pipeline, folds=2, n=1)
 
 
 def test_predict():
