@@ -1,6 +1,7 @@
 ## whereami
 
 [![Build Status](https://travis-ci.org/kootenpv/whereami.svg?branch=master)](https://travis-ci.org/kootenpv/whereami)
+[![Coverage Status](https://coveralls.io/repos/github/kootenpv/whereami/badge.svg?branch=master)](https://coveralls.io/github/kootenpv/whereami?branch=master)
 [![PyPI](https://img.shields.io/pypi/v/whereami.svg?style=flat-square)](https://pypi.python.org/pypi/whereami/)
 [![PyPI](https://img.shields.io/pypi/pyversions/whereami.svg?style=flat-square)](https://pypi.python.org/pypi/whereami/)
 
