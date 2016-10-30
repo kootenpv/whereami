@@ -7,7 +7,7 @@ def get_whereami_path(path="~/.whereami"):
 
 def ensure_whereami_path():
     path = get_whereami_path()
-    if not os.path.exists(path):
+    if not os.path.exists(path):  # pragma: no cover
         os.makedirs(path)
     return path
 

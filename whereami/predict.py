@@ -23,19 +23,20 @@ def crossval(clf=None, X=None, y=None, folds=10, n=5):
     tot = 0
     print("KFold folds={}, running {} times".format(folds, n))
     for i in range(n):
-        res = cross_val_score(clf, X, y, cv=10).mean()
+        res = cross_val_score(clf, X, y, cv=folds).mean()
         tot += res
         print("{}/{}: {}".format(i + 1, n, res))
     print("-------- total --------")
     print(tot / n)
     return tot / n
 
+
 def locations():
     X, y = get_train_data()
-    if len(y) == 0:
+    if len(y) == 0:  # pragma: no cover
         msg = "No location samples available. First learn a location, e.g. with `whereami learn -l kitchen`."
         print(msg)
     else:
         occurrences = Counter(y)
-        for key,value in occurrences.items():
-            print("{}: {}".format(key,value))
+        for key, value in occurrences.items():
+            print("{}: {}".format(key, value))

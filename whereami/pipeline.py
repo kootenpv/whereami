@@ -1,10 +1,14 @@
+import os
 import pickle
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.pipeline import make_pipeline
 from whereami.get_data import get_train_data
 from whereami.utils import get_model_file
-from whereami.compat import FileNotFoundError
+
+
+class LearnLocation(Exception):
+    pass
 
 
 def get_pipeline(clf=RandomForestClassifier(n_estimators=500, class_weight="balanced")):
@@ -28,10 +32,9 @@ def train_model():
 
 def get_model():
     model_file = get_model_file()
-    try:
-        with open(model_file, "rb") as f:
-            lp = pickle.load(f)
-    except FileNotFoundError:
+    if not os.path.isfile(model_file):  # pragma: no cover
         msg = "First learn a location, e.g. with `whereami learn -l kitchen`."
-        raise FileNotFoundError(msg)
+        raise LearnLocation(msg)
+    with open(model_file, "rb") as f:
+        lp = pickle.load(f)
     return lp

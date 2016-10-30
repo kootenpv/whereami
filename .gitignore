@@ -15,3 +15,7 @@ __pycache__/
 /lib/
 /pip-selfcheck.json
 .tox/
+.cache
+.coverage
+.coverage.*
+.coveralls.yml
