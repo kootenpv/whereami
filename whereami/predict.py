@@ -13,7 +13,7 @@ def predict_proba():
 
 def predict():
     lp = get_model()
-    print(lp.predict(sample())[0])
+    return lp.predict(sample())[0]
 
 
 def crossval(clf=None, X=None, y=None, folds=10, n=5):

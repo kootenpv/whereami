@@ -34,7 +34,7 @@ def main():
     if args.command == "predict_proba":
         predict_proba()
     elif args.command == "predict":
-        predict()
+        print(predict())
     elif args.command == "learn":
         learn(args.location, args.num_samples)
     elif args.command == "crossval":
