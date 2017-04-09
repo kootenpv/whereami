@@ -19,6 +19,8 @@ def get_pipeline(clf=RandomForestClassifier(n_estimators=500, class_weight="bala
 def train_model():
     model_file = get_model_file()
     X, y = get_train_data()
+    if len(X) == 0:
+        raise ValueError("No wifi access points have been found during training")
     # fantastic: because using "quality" rather than "rssi", we expect values 0-150
     # 0 essentially indicates no connection
     # 150 is something like best possible connection
