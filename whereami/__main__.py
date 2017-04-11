@@ -26,6 +26,8 @@ def get_args_parser():
     learn_parser = subparsers.add_parser('learn')
     learn_parser.add_argument('--location', '-l', required=True,
                               help='A name-tag for location to learn.')
+    learn_parser.add_argument('--num_samples', '-n', type=int, default=100,
+                              help='Number of samples to take')
     rename = subparsers.add_parser('rename')
     rename.add_argument('label', help='Label to rename')
     rename.add_argument('new_label', help='New label name')
