@@ -18,3 +18,11 @@ def get_model_file(path="~/.whereami", model="model.pkl"):
 
 def get_label_file(path, label):
     return os.path.join(get_whereami_path(path), label)
+
+
+def rename_label(label, new_label, path="~/.whereami"):
+    whereami_path = get_whereami_path(path)
+    from_path = os.path.join(whereami_path, label + ".txt")
+    new_path = os.path.join(whereami_path, new_label + ".txt")
+    os.rename(from_path, new_path)
+    print("Renamed {} to {}".format(from_path, new_path))

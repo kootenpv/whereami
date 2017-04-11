@@ -3,8 +3,10 @@ from whereami.predict import predict_proba
 from whereami.predict import crossval
 from whereami.predict import locations
 from whereami.learn import learn
+from whereami.pipeline import train_model
 
 from whereami import print_version
+from whereami.utils import rename_label
 
 
 def get_args_parser():
@@ -20,11 +22,13 @@ def get_args_parser():
     subparsers.add_parser('predict_proba')
     subparsers.add_parser('crossval')
     subparsers.add_parser('locations')
+    subparsers.add_parser('ls')
     learn_parser = subparsers.add_parser('learn')
     learn_parser.add_argument('--location', '-l', required=True,
                               help='A name-tag for location to learn.')
-    learn_parser.add_argument('--num_samples', '-n', type=int, default=100,
-                              help='Number of samples to take')
+    rename = subparsers.add_parser('rename')
+    rename.add_argument('label', help='Label to rename')
+    rename.add_argument('new_label', help='New label name')
     return p
 
 
@@ -39,8 +43,12 @@ def main():
         learn(args.location, args.num_samples)
     elif args.command == "crossval":
         crossval()
-    elif args.command == "locations":
+    elif args.command in ["locations", "ls"]:
         locations()
+    elif args.command == "rename":
+        rename_label(args.label, args.new_label)
+        print("Retraining model...")
+        train_model()
     else:
         parser.print_help()
         parser.exit(1)
