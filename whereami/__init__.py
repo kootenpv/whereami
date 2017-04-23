@@ -1,8 +1,12 @@
 import sys
 
 __project__ = "whereami"
-__version__ = "0.3.63"
+__version__ = "0.4.68"
 __repo__ = "https://github.com/kootenpv/whereami"
+
+from whereami.learn import learn
+from whereami.pipeline import get_pipeline
+from whereami.predict import predict, predict_proba, crossval, locations
 
 
 def print_version():

@@ -47,6 +47,14 @@ whereami predict_proba
 
 If you want to delete some of the last lines, or the data in general, visit your `$USER/.whereami` folder.
 
+### Python
+
+Any of the functionality is available in python as well. Generally speaking, commands can be imported:
+
+    from whereami import learn
+    from whereami import get_pipeline
+    from whereami import predict, predict_proba, crossval, locations
+
 ### Accuracy
 
 Generally it should work really well. I've been able to learn using only 7 access points at home (test using `access_points -n`). At organizations you might see 70+.
@@ -60,8 +68,6 @@ Height: Surprisingly, vertical difference in location is typically even more dis
 
 ### Related Projects
 - The [wherearehue](https://github.com/DeastinY/wherearehue) project can be used to toggle Hue light bulbs based on the learned locations.
-
-
 
 ### Almost entirely "copied" from:
 
