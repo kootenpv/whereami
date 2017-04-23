@@ -9,8 +9,8 @@ def aps_to_dict(aps):
     return {ap['ssid'] + " " + ap['bssid']: ap['quality'] for ap in aps}
 
 
-def sample():
-    wifi_scanner = get_scanner()
+def sample(device=""):
+    wifi_scanner = get_scanner(device)
     if not os.environ.get("PYTHON_ENV", False):
         aps = wifi_scanner.get_access_points()
     else:

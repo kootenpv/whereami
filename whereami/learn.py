@@ -14,12 +14,12 @@ def write_data(label_path, data):
         f.write("\n")
 
 
-def learn(label, n=100):
+def learn(label, n=100, device=""):
     path = ensure_whereami_path()
     label_path = get_label_file(path, label + ".txt")
     for _ in tqdm(range(n)):
         try:
-            new_sample = sample()
+            new_sample = sample(device)
             if new_sample:
                 write_data(label_path, new_sample)
         except KeyboardInterrupt:  # pragma: no cover

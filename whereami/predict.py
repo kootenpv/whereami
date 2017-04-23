@@ -6,17 +6,15 @@ from whereami.get_data import sample
 from whereami.pipeline import get_model
 
 
-def predict_proba(input_path=None, model_path=None):
+def predict_proba(input_path=None, model_path=None, device=""):
     lp = get_model(model_path)
-    data_sample = sample() if input_path is None else get_external_sample(input_path)
-    print(
-        {x: y for x, y in
-         zip(lp.classes_, lp.predict_proba(data_sample)[0])})
+    data_sample = sample(device) if input_path is None else get_external_sample(input_path)
+    print(dict(zip(lp.classes_, lp.predict_proba(data_sample)[0])))
 
 
-def predict(input_path=None, model_path=None):
+def predict(input_path=None, model_path=None, device=""):
     lp = get_model(model_path)
-    data_sample = sample() if input_path is None else get_external_sample(input_path)
+    data_sample = sample(device) if input_path is None else get_external_sample(input_path)
     return lp.predict(data_sample)[0]
 
 
@@ -36,7 +34,7 @@ def crossval(clf=None, X=None, y=None, folds=10, n=5, path=None):
 
 
 def locations(path=None):
-    X, y = get_train_data(path)
+    _, y = get_train_data(path)
     if len(y) == 0:  # pragma: no cover
         msg = "No location samples available. First learn a location, e.g. with `whereami learn -l kitchen`."
         print(msg)
