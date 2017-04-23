@@ -19,6 +19,14 @@ def sample():
     return aps_to_dict(aps)
 
 
+def get_external_sample(path):
+    data = []
+    with open(os.path.join(path, "current.loc.txt")) as f:
+        for line in f:
+            data.append(json.loads(line))
+    return data
+
+
 def get_train_data(folder=None):
     if folder is None:
         folder = ensure_whereami_path()

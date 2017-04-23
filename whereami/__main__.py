@@ -18,19 +18,35 @@ def get_args_parser():
     p = argparse.ArgumentParser(description=desc, formatter_class=RawTextHelpFormatter)
     p.add_argument('--version', '-v', action='version', version=print_version())
     subparsers = p.add_subparsers(dest="command")
-    subparsers.add_parser('predict')
-    subparsers.add_parser('predict_proba')
-    subparsers.add_parser('crossval')
-    subparsers.add_parser('locations')
-    subparsers.add_parser('ls')
+
+    predict_parser = subparsers.add_parser('predict')
+    predict_parser.add_argument('--input_path', '-ip', default=None, help='The directory containing current.loc.txt')
+    predict_parser.add_argument('--model_path', '-mp', default=None, help='The directory of the model / trained data')
+
+    predict_proba_parser = subparsers.add_parser('predict_proba')
+    predict_proba_parser.add_argument('--input_path', '-ip', default=None, help='The directory containing current.loc.txt')
+    predict_proba_parser.add_argument('--model_path', '-mp', default=None, help='The directory of the model / trained data')
+
+    crossval_parser = subparsers.add_parser('crossval')
+    crossval_parser.add_argument('--model_path', '-mp', default=None, help='The directory of the model / trained data')
+
+    ls_parser = subparsers.add_parser('ls')
+    ls_parser.add_argument('--model_path', '-mp', default=None, help='The directory of the model / trained data')
+
+    locations_parser = subparsers.add_parser('locations')
+    locations_parser.add_argument('--model_path', '-mp', default=None, help='The directory of the model / trained data')
+
     learn_parser = subparsers.add_parser('learn')
-    learn_parser.add_argument('--location', '-l', required=True,
-                              help='A name-tag for location to learn.')
-    learn_parser.add_argument('--num_samples', '-n', type=int, default=100,
-                              help='Number of samples to take')
+    learn_parser.add_argument('--location', '-l', required=True, help='A name-tag for location to learn.')
+    learn_parser.add_argument('--num_samples', '-n', type=int, default=100, help='Number of samples to take')
+
     rename = subparsers.add_parser('rename')
     rename.add_argument('label', help='Label to rename')
     rename.add_argument('new_label', help='New label name')
+    rename.add_argument('--model_path', '-mp', default=None, help='The directory of the model / trained data')
+
+    train_parser = subparsers.add_parser('train')
+    train_parser.add_argument('--model_path', '-mp', default=None, help='The directory of the model / trained data')
     return p
 
 
@@ -38,19 +54,25 @@ def main():
     parser = get_args_parser()
     args = parser.parse_args()
     if args.command == "predict_proba":
-        predict_proba()
+        predict_proba(args.input_path, args.model_path)
     elif args.command == "predict":
-        print(predict())
+        print(predict(args.input_path, args.model_path))
     elif args.command == "learn":
         learn(args.location, args.num_samples)
     elif args.command == "crossval":
-        crossval()
+        crossval(path=args.model_path)
     elif args.command in ["locations", "ls"]:
-        locations()
+        locations(args.model_path)
     elif args.command == "rename":
         rename_label(args.label, args.new_label)
         print("Retraining model...")
         train_model()
+    elif args.command == "train":
+        train_model(args.model_path)
     else:
         parser.print_help()
         parser.exit(1)
+
+
+if __name__ == '__main__':
+    main()

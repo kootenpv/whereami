@@ -12,13 +12,12 @@ class LearnLocation(Exception):
 
 
 def get_pipeline(clf=RandomForestClassifier(n_estimators=500, class_weight="balanced")):
-    return make_pipeline(DictVectorizer(sparse=False),
-                         clf)
+    return make_pipeline(DictVectorizer(sparse=False), clf)
 
 
-def train_model():
-    model_file = get_model_file()
-    X, y = get_train_data()
+def train_model(path=None):
+    model_file = get_model_file(path)
+    X, y = get_train_data(path)
     if len(X) == 0:
         raise ValueError("No wifi access points have been found during training")
     # fantastic: because using "quality" rather than "rssi", we expect values 0-150
@@ -32,8 +31,8 @@ def train_model():
     return lp
 
 
-def get_model():
-    model_file = get_model_file()
+def get_model(path=None):
+    model_file = get_model_file(path)
     if not os.path.isfile(model_file):  # pragma: no cover
         msg = "First learn a location, e.g. with `whereami learn -l kitchen`."
         raise LearnLocation(msg)
