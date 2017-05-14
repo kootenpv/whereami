@@ -1,7 +1,7 @@
 import sys
 
 __project__ = "whereami"
-__version__ = "0.4.68"
+__version__ = "0.4.69"
 __repo__ = "https://github.com/kootenpv/whereami"
 
 from whereami.learn import learn

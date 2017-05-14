@@ -69,7 +69,7 @@ Height: Surprisingly, vertical difference in location is typically even more dis
 ### Related Projects
 - The [wherearehue](https://github.com/DeastinY/wherearehue) project can be used to toggle Hue light bulbs based on the learned locations.
 
-### Almost entirely "copied" from:
+###  Almost entirely "copied" from:
 
 https://github.com/schollz/find
 
