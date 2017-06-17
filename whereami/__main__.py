@@ -69,27 +69,30 @@ def get_args_parser():
 
 
 def main():
-    parser = get_args_parser()
-    args = parser.parse_args()
-    if args.command == "predict_proba":
-        predict_proba(args.input_path, args.model_path, args.device)
-    elif args.command == "predict":
-        print(predict(args.input_path, args.model_path, args.device))
-    elif args.command == "learn":
-        learn(args.location, args.num_samples, args.device)
-    elif args.command == "crossval":
-        crossval(path=args.model_path)
-    elif args.command in ["locations", "ls"]:
-        locations(args.model_path)
-    elif args.command == "rename":
-        rename_label(args.label, args.new_label)
-        print("Retraining model...")
-        train_model()
-    elif args.command == "train":
-        train_model(args.model_path)
-    else:
-        parser.print_help()
-        parser.exit(1)
+    try:
+        parser = get_args_parser()
+        args = parser.parse_args()
+        if args.command == "predict_proba":
+            predict_proba(args.input_path, args.model_path, args.device)
+        elif args.command == "predict":
+            print(predict(args.input_path, args.model_path, args.device))
+        elif args.command == "learn":
+            learn(args.location, args.num_samples, args.device)
+        elif args.command == "crossval":
+            crossval(path=args.model_path)
+        elif args.command in ["locations", "ls"]:
+            locations(args.model_path)
+        elif args.command == "rename":
+            rename_label(args.label, args.new_label)
+            print("Retraining model...")
+            train_model()
+        elif args.command == "train":
+            train_model(args.model_path)
+        else:
+            parser.print_help()
+            parser.exit(1)
+    except (KeyboardInterrupt, SystemExit):
+        exit()
 
 
 if __name__ == '__main__':
