@@ -11,7 +11,7 @@ class LearnLocation(Exception):
     pass
 
 
-def get_pipeline(clf=RandomForestClassifier(n_estimators=500, class_weight="balanced")):
+def get_pipeline(clf=RandomForestClassifier(n_estimators=100, class_weight="balanced")):
     return make_pipeline(DictVectorizer(sparse=False), clf)
 
 

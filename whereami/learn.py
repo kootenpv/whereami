@@ -16,7 +16,7 @@ def write_data(label_path, data):
         f.write("\n")
 
 
-def learn(label, n=20, device=""):
+def learn(label, n=1, device=""):
     path = ensure_whereami_path()
     label_path = get_label_file(path, label + ".txt")
     for i in tqdm(range(n)):

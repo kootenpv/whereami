@@ -23,11 +23,11 @@ The package [access_points](https://github.com/kootenpv/access_points) was creat
 ### Usage
 
 ```bash
-# in your bedroom, takes 100 samples
-whereami learn -l bedroom -n 100
+# in your bedroom, takes a sample
+whereami learn -l bedroom
 
-# in your kitchen, takes 100 samples
-whereami learn -l kitchen -n 100
+# in your kitchen, takes a sample
+whereami learn -l kitchen
 
 # get a list of already learned locations
 whereami locations
@@ -56,13 +56,13 @@ Any of the functionality is available in python as well. Generally speaking, com
     from whereami import predict, predict_proba, crossval, locations
 
 ### Accuracy
-
+k
 Generally it should work really well. I've been able to learn using only 7 access points at home (test using `access_points -n`). At organizations you might see 70+.
 
 Distance: anything around ~10 meters or more should get >99% accuracy.
 
-If you're adventurous and you want to learn to distinguish between couch #1 and couch #2 (i.e. 2 meters apart), it is the most robust when you switch locations and train in turn. E.g. 20 in Spot A, then 20 in Spot B then start again with A.
-Doing this in 100 in spot A, then 100 in spot B and then immediately using "predict" will yield spot B as an answer. No worries, the effect of this temporal overfitting disappears over time. And, in fact, this is only a real concern for the very short distances.
+If you're adventurous and you want to learn to distinguish between couch #1 and couch #2 (i.e. 2 meters apart), it is the most robust when you switch locations and train in turn. E.g. first in Spot A, then in Spot B then start again with A.
+Doing this in spot A, then spot B and then immediately using "predict" will yield spot B as an answer usually. No worries, the effect of this temporal overfitting disappears over time. And, in fact, this is only a real concern for the very short distances. Just take a sample after some time in both locations and it should become very robust.
 
 Height: Surprisingly, vertical difference in location is typically even more distinct than horizontal differences.
 
