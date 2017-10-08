@@ -53,10 +53,13 @@ class Predicter():
         self.device = device
         self.clf = get_model(model)
         self.wifi_scanner = get_scanner(device)
+        self.predicted_value = None
 
     def predict(self):
         aps = self.wifi_scanner.get_access_points()
-        return self.clf.predict(aps_to_dict(aps))[0]
+        self.predicted_value = self.clf.predict(aps_to_dict(aps))[0]
+        return self.predicted_value
 
     def refresh(self):
-        return Predicter(self.model, self.device)
+        self.clf = get_model(self.model)
+        self.wifi_scanner = get_scanner(self.device)
