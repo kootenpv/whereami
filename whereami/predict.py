@@ -1,9 +1,12 @@
 from collections import Counter
 
-from whereami.compat import cross_val_score
+from access_points import get_scanner
+
 from whereami.get_data import get_train_data, get_external_sample
 from whereami.get_data import sample
 from whereami.pipeline import get_model
+from whereami.get_data import aps_to_dict
+from whereami.compat import cross_val_score
 
 
 def predict_proba(input_path=None, model_path=None, device=""):
@@ -42,3 +45,18 @@ def locations(path=None):
         occurrences = Counter(y)
         for key, value in occurrences.items():
             print("{}: {}".format(key, value))
+
+
+class Predicter():
+    def __init__(self, model=None, device=""):
+        self.model = model
+        self.device = device
+        self.clf = get_model(model)
+        self.wifi_scanner = get_scanner(device)
+
+    def predict(self):
+        aps = self.wifi_scanner.get_access_points()
+        return self.clf.predict(aps_to_dict(aps))[0]
+
+    def refresh(self):
+        return Predicter(self.model, self.device)
