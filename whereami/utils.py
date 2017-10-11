@@ -1,7 +1,10 @@
 import os
 
 
-def get_whereami_path(path="~/.whereami"):
+def get_whereami_path(path=None):
+    if path is None:
+        _USERNAME = os.getenv("SUDO_USER") or os.getenv("USER")
+        path = os.path.expanduser('~' + _USERNAME)
     return os.path.expanduser(path)
 
 
