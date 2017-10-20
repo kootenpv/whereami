@@ -53,7 +53,7 @@ def get_args_parser():
     learn_parser.add_argument('--device', '-d', default="",
                               help='Change the wifi device to use')
     learn_parser.add_argument('--num_samples', '-n', type=int,
-                              default=100, help='Number of samples to take')
+                              default=1, help='Number of samples to take')
 
     rename = subparsers.add_parser('rename')
 
