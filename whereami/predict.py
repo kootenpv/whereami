@@ -12,7 +12,7 @@ from whereami.compat import cross_val_score
 def predict_proba(input_path=None, model_path=None, device=""):
     lp = get_model(model_path)
     data_sample = sample(device) if input_path is None else get_external_sample(input_path)
-    print(dict(zip(lp.classes_, lp.predict_proba(data_sample)[0])))
+    return dict(zip(lp.classes_, lp.predict_proba(data_sample)[0]))
 
 
 def predict(input_path=None, model_path=None, device=""):

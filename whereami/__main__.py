@@ -7,6 +7,7 @@ from whereami.pipeline import train_model
 
 from whereami import print_version
 from whereami.utils import rename_label
+import json
 
 
 def get_args_parser():
@@ -28,6 +29,8 @@ def get_args_parser():
         '--device', '-d', default="", help='Change the wifi device to use')
 
     predict_proba_parser = subparsers.add_parser('predict_proba')
+    predict_proba_parser.add_argument(
+        '--format', '-f', default=None, help='Output format')
     predict_proba_parser.add_argument(
         '--input_path', '-ip', default=None, help='The directory containing current.loc.txt')
     predict_proba_parser.add_argument(
@@ -73,7 +76,16 @@ def main():
         parser = get_args_parser()
         args = parser.parse_args()
         if args.command == "predict_proba":
-            predict_proba(args.input_path, args.model_path, args.device)
+            v = predict_proba(args.input_path, args.model_path, args.device)
+            if not args.format:
+                print(v)
+            elif args.format == 'json':
+                print(json.dumps(v))
+            elif args.format == 'csv':
+                for k, v in sorted(v.items(), reverse=True, key=lambda x: x[1]):
+                    print("%.03f,%s" % (v, k))
+            else:
+                assert False, "bad format: %s" % args.format
         elif args.command == "predict":
             print(predict(args.input_path, args.model_path, args.device))
         elif args.command == "learn":
