@@ -25,6 +25,8 @@ def predict(input_path=None, model_path=None, device=""):
 def crossval(clf=None, X=None, y=None, folds=10, n=5, path=None):
     if X is None or y is None:
         X, y = get_train_data(path)
+    if len(X) < folds:
+        raise ValueError('There are not enough samples ({}). Need at least {}.'.format(len(X), folds))
     clf = clf or get_model(path)
     tot = 0
     print("KFold folds={}, running {} times".format(folds, n))
