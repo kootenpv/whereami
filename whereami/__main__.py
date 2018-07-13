@@ -54,6 +54,8 @@ def get_args_parser():
                               help='Change the wifi device to use')
     learn_parser.add_argument('--num_samples', '-n', type=int,
                               default=1, help='Number of samples to take')
+    learn_parser.add_argument('--model_path', '-mp', default=None,
+                                 help='The directory of the model / trained data')
 
     rename = subparsers.add_parser('rename')
 
@@ -77,7 +79,7 @@ def main():
         elif args.command == "predict":
             print(predict(args.input_path, args.model_path, args.device))
         elif args.command == "learn":
-            learn(args.location, args.num_samples, args.device)
+            learn(args.location, args.num_samples, args.device, args.model_path)
         elif args.command == "crossval":
             crossval(path=args.model_path)
         elif args.command in ["locations", "ls"]:

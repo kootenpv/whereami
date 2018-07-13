@@ -9,8 +9,8 @@ def get_whereami_path(path=None):
     return os.path.expanduser(path)
 
 
-def ensure_whereami_path():
-    path = get_whereami_path()
+def ensure_whereami_path(path=None):
+    path = get_whereami_path(path)
     if not os.path.exists(path):  # pragma: no cover
         os.makedirs(path)
     return path
