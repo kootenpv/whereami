@@ -39,5 +39,5 @@ def get_train_data(folder=None):
                 for line in f:
                     data.append(json.loads(line))
             X.extend(data)
-            y.extend([fname.rstrip(".txt")] * len(data))
+            y.extend([os.path.splitext(fname)[0]] * len(data))
     return X, y
