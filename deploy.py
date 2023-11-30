@@ -22,9 +22,8 @@ with open('whereami/__init__.py') as f:
     init = f.read()
 
 with open('whereami/__init__.py', 'w') as f:
-    f.write(
-        re.sub('__version__ = "[0-9.]+"',
-               '__version__ = "{}"'.format(version), init))
+    f.write(re.sub('__version__ = "[0-9.]+"', '__version__ = "{}"'.format(version), init))
 
-py_version = "python3.7" if sh.which("python3.7") is not None else "python"
-os.system('{} setup.py sdist bdist_wheel upload'.format(py_version))
+os.system("rm -rf dist/")
+os.system("python setup.py sdist bdist_wheel")
+os.system("twine upload dist/*")
